@@ -21,9 +21,9 @@ def read_file():
             except Exception:
                 pass
     return addresses
-def sign(ip,algod_port,algod_token,kmd_port,kmd_token,address_receiver,total,wallet,password):
+def sign(algod_port,algod_token,kmd_port,kmd_token,address_receiver,total,wallet,password):
     #Initialization
-    ALGOD_ADDRESS = "http://"+ip
+    ALGOD_ADDRESS = "http://localhost"
     ALGOD_PORT = algod_port
     ALGOD_URL = f"{ALGOD_ADDRESS}:{algod_port}"
     ALGOD_TOKEN = algod_token
@@ -62,7 +62,7 @@ if __name__ == "__main__":
     transactions_number = 1000
     queue = Queue()
     # s0 = sign("8080","dd9b9c47a4a09df18976bc93237c99e3e3d2c4c26f60518572267e71dfe1d21d","7833","5e5051fe7357107a383f6bf14e710278a6ebaf151983b2e50872e6d52ad6663b","6DQ7JQN6T52CREL6PDXTKNECZTJBUN6H6T6FIMUBIOCG26PQC6QPE7D6HM",transactions_number,"Melodyes","Me1091372")
-    s1 = sign("44.199.244.229","8080","4e831ee42bc9a01c6abf12044298c54d14fb3dbcdff283dd847d2054925ef39d","7833","a101bdf50463a1ae9d188c86c024b2e2ef8bb888f99a4f19d94b8a7abf348622","DO5KZDNFSNX24YBGHLQRPBVWIZM62FXZT2QD5V4CQ3H2QXDISKOBUGUL6M",transactions_number,"molud","molud")
+    s1 = sign("8080","4e831ee42bc9a01c6abf12044298c54d14fb3dbcdff283dd847d2054925ef39d","7833","a101bdf50463a1ae9d188c86c024b2e2ef8bb888f99a4f19d94b8a7abf348622","DO5KZDNFSNX24YBGHLQRPBVWIZM62FXZT2QD5V4CQ3H2QXDISKOBUGUL6M",transactions_number,"molud","molud")
     # s2 = sign("8082","1111111111111111111111111111111111111111111111111111111111111111","9092","caa0d763e906d90a3629fe0756e938f040ac2cb5b5d1b882fd8002dabfac2ff9","6DQ7JQN6T52CREL6PDXTKNECZTJBUN6H6T6FIMUBIOCG26PQC6QPE7D6HM",transactions_number,"molud","molud")
     # s3 = sign("8083","1111111111111111111111111111111111111111111111111111111111111111","9093","e14dd6ac2103b022ce2aa55cdfdbbde86b34715fa30a14b88d6b5e52b70fa2fe","6DQ7JQN6T52CREL6PDXTKNECZTJBUN6H6T6FIMUBIOCG26PQC6QPE7D6HM",transactions_number,"molud","molud")
     # p0 = multiprocessing.Process(target=send_trans_client,args=("p0",s0[0],s0[1],queue))
