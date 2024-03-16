@@ -5,6 +5,7 @@ import time
 import csv
 import multiprocessing 
 from multiprocessing import Queue
+import sys
 
 def create_array(number):
     arr = []
@@ -59,28 +60,19 @@ def send_trans_client(name,algod_client,stx_array,queue):
 
 
 if __name__ == "__main__": 
-    transactions_number = 1000
+    kmd_token = ""
+    algod_token = ""
+    with open('/var/lib/algorand/algod.token', 'r') as file:
+        algod_token = file.read()
+    with open('/home/ubuntu/.algorand/testnet-v1.0/kmd-v0.5/kmd.token', 'r') as file:
+        kmd_token = file.read()
+    transactions_number = sys.argv[1]
     queue = Queue()
-    # s0 = sign("8080","dd9b9c47a4a09df18976bc93237c99e3e3d2c4c26f60518572267e71dfe1d21d","7833","5e5051fe7357107a383f6bf14e710278a6ebaf151983b2e50872e6d52ad6663b","6DQ7JQN6T52CREL6PDXTKNECZTJBUN6H6T6FIMUBIOCG26PQC6QPE7D6HM",transactions_number,"Melodyes","Me1091372")
-    s1 = sign("8080","4e831ee42bc9a01c6abf12044298c54d14fb3dbcdff283dd847d2054925ef39d","7833","a101bdf50463a1ae9d188c86c024b2e2ef8bb888f99a4f19d94b8a7abf348622","DO5KZDNFSNX24YBGHLQRPBVWIZM62FXZT2QD5V4CQ3H2QXDISKOBUGUL6M",transactions_number,"molud","molud")
-    # s2 = sign("8082","1111111111111111111111111111111111111111111111111111111111111111","9092","caa0d763e906d90a3629fe0756e938f040ac2cb5b5d1b882fd8002dabfac2ff9","6DQ7JQN6T52CREL6PDXTKNECZTJBUN6H6T6FIMUBIOCG26PQC6QPE7D6HM",transactions_number,"molud","molud")
-    # s3 = sign("8083","1111111111111111111111111111111111111111111111111111111111111111","9093","e14dd6ac2103b022ce2aa55cdfdbbde86b34715fa30a14b88d6b5e52b70fa2fe","6DQ7JQN6T52CREL6PDXTKNECZTJBUN6H6T6FIMUBIOCG26PQC6QPE7D6HM",transactions_number,"molud","molud")
-    # p0 = multiprocessing.Process(target=send_trans_client,args=("p0",s0[0],s0[1],queue))
+    s1 = sign("8080",algod_token,"7833",kmd_token,"DO5KZDNFSNX24YBGHLQRPBVWIZM62FXZT2QD5V4CQ3H2QXDISKOBUGUL6M",transactions_number,"molud","molud")
     p1 = multiprocessing.Process(target=send_trans_client,args=("p1",s1[0],s1[1],queue))
-    # p2 = multiprocessing.Process(target=send_trans_client,args=("p2",s2[0],s2[1],queue))
-    # p3 = multiprocessing.Process(target=send_trans_client,args=("p3",s3[0],s3[1],queue))
-
-    # p0.start()
     p1.start()
-    # p2.start()
-    # p3.start()
     start_time = time.time()
-
-
-    # p0.join()
     p1.join()
-    # p2.join()
-    # p3.join()
     end_time = time.time()
     whole_transactions = 0
     whole_faulty_transactions = 0
