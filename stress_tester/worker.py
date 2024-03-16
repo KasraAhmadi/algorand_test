@@ -66,7 +66,7 @@ if __name__ == "__main__":
         algod_token = file.read()
     with open('/home/ubuntu/.algorand/testnet-v1.0/kmd-v0.5/kmd.token', 'r') as file:
         kmd_token = file.read()
-    transactions_number = sys.argv[1]
+    transactions_number = int(sys.argv[1])
     queue = Queue()
     s1 = sign("8080",algod_token,"7833",kmd_token,"DO5KZDNFSNX24YBGHLQRPBVWIZM62FXZT2QD5V4CQ3H2QXDISKOBUGUL6M",transactions_number,"molud","molud")
     p1 = multiprocessing.Process(target=send_trans_client,args=("p1",s1[0],s1[1],queue))
